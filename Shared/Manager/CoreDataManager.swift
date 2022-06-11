@@ -33,7 +33,15 @@ struct CoreDataManger {
         }
     }
     
+   
+    func getAllMovies() -> [Movie]{
+        let fetchRequest : NSFetchRequest<Movie> = Movie.fetchRequest()
+                
+        do{
+           return  try persistantContainer.viewContext.fetch(fetchRequest)
+        }catch{
+            return []
+        }
+    }
     
-
-  
 }
