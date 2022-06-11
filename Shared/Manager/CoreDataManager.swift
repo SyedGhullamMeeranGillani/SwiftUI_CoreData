@@ -43,5 +43,18 @@ struct CoreDataManger {
             return []
         }
     }
-    
+   
+    func deleteMovie(movie: Movie){
+        
+        persistantContainer.viewContext.delete(movie)
+        
+        do{
+            try persistantContainer.viewContext.save()
+
+        }catch{
+            persistantContainer.viewContext.rollback()
+            print("error to save context\(error)")
+        }
+        
+    }
 }

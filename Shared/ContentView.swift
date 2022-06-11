@@ -26,14 +26,22 @@ struct ContentView: View {
                 populateMovie()
             }
             
-            List(movies,id: \.self){movie in
-                Text(movie.title ?? "")
-            }
             
+            List{
+                ForEach(movies, id: \.self){ movie in
+                    Text(movie.title ?? "")
+                }.onDelete { IndexSet in
+                    IndexSet.forEach { index in
+                        let movie = movies[index]
+
+                        manager.deleteMovie(movie: movie)
+                        populateMovie()
+                    }
+                }
+            }
             Spacer()
         }.padding()
             .onAppear {
-//               movies = manager.getAllMovies()
                 populateMovie()
             }
         
