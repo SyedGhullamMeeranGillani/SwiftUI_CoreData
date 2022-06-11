@@ -33,35 +33,7 @@ struct CoreDataManger {
         }
     }
     
-    func getAllMovies() -> [Movie]{
-        let fetchRequest : NSFetchRequest<Movie> = Movie.fetchRequest()
-                
-        do{
-           return  try persistantContainer.viewContext.fetch(fetchRequest)
-        }catch{
-            return []
-        }
-    }
     
-    func deleteMovie(movie: Movie){
-        
-        persistantContainer.viewContext.delete(movie)
-        
-        do{
-            try persistantContainer.viewContext.save()
 
-        }catch{
-            persistantContainer.viewContext.rollback()
-            print("error to save context\(error)")
-        }
-        
-    }
-    func update(){
-        do{
-            try persistantContainer.viewContext.save()
-        }catch{
-            
-            try persistantContainer.viewContext.rollback()
-        }
-    }
+  
 }
